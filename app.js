@@ -13,23 +13,23 @@ app.use(express.bodyParser());
 app.get('/init', function(req, res){
 	db.event.insert({ 
 		text:"My test event A", 
-		start_date: new Date(2013,8,1),
-		end_date:	new Date(2013,8,5)
+		start_date: new Date(2016,8,1),
+		end_date:	new Date(2016,8,5)
 	});
 	db.event.insert({ 
 		text:"My test event B", 
-		start_date: new Date(2013,8,19),
-		end_date:	new Date(2013,8,24)
+		start_date: new Date(2016,8,19),
+		end_date:	new Date(2016,8,24)
 	});
 	db.event.insert({ 
 		text:"Morning event", 
-		start_date: new Date(2013,8,4,4,0),
-		end_date:	new Date(2013,8,4,14,0)
+		start_date: new Date(2016,8,4,4,0),
+		end_date:	new Date(2016,8,4,14,0)
 	});
 	db.event.insert({ 
 		text:"One more test event", 
-		start_date: new Date(2013,8,3),
-		end_date:	new Date(2013,8,8),
+		start_date: new Date(2016,8,3),
+		end_date:	new Date(2016,8,8),
 		color: "#DD8616"
 	});
 

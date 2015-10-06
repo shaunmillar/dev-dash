@@ -18,6 +18,51 @@
 </style>
 
 <script type="text/javascript" charset="utf-8">
+
+	Date.prototype.dateAdd = function(size,value) {
+		value = parseInt(value);
+		var incr = 0;
+		switch (size) {
+			case 'day':
+				incr = value * 24;
+				this.dateAdd('hour',incr);
+				break;
+			case 'hour':
+				incr = value * 60;
+				this.dateAdd('minute',incr);
+				break;
+			case 'week':
+				incr = value * 7;
+				this.dateAdd('day',incr);
+				break;
+			case 'minute':
+				incr = value * 60;
+				this.dateAdd('second',incr);
+				break;
+			case 'second':
+				incr = value * 1000;
+				this.dateAdd('millisecond',incr);
+				break;
+			case 'month':
+				value = value + this.getUTCMonth();
+				if (value/12>0) {
+					this.dateAdd('year',value/12);
+					value = value % 12;
+				}
+				this.setUTCMonth(value);
+				break;
+			case 'millisecond':
+				this.setTime(this.getTime() + value);
+				break;
+			case 'year':
+				this.setFullYear(this.getUTCFullYear()+value);
+				break;
+			default:
+				throw new Error('Invalid date increment passed');
+				break;
+		}
+	}
+
 	function init() {
 		scheduler.config.xml_date="%Y-%m-%d %H:%i";
 		
@@ -32,8 +77,10 @@
 		scheduler.load("/data", "json");	
 		
 		//scheduler is editable from now and for 5 years ahead
-		scheduler.config.limit_start = new Date();
-		scheduler.config.limit_end = scheduler.date.add(new Date(), 5,'year');
+		var d = new Date();
+		d.dateAdd('day', -1);
+		scheduler.config.limit_start = d;
+		scheduler.config.limit_end = scheduler.date.add(new Date(), 15,'year');
 
 		var dp = new dataProcessor("/data");
 		dp.init(scheduler);
