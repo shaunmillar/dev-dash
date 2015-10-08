@@ -4,7 +4,6 @@ var path = require('path');
 var db = require('mongoskin').db("localhost/testdb", { w: 0});
     db.bind('event');
 
-
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.bodyParser());

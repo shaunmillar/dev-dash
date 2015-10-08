@@ -2522,12 +2522,12 @@ function() {
                         e._time_format_order[0] = d, r += "<select>";
                         var h = n,
                             _ = s.getDate();
-
-                        for (e._time_values = []; a > h;) {
+						// next line contains hack to get -30 minutes for obtaining 7:30 pm from 8 pm end time set in config. 
+                        for (e._time_values = []; (a - 30) > h;) {
                             var c = this.templates.time_picker(s);
                             r += "<option value='" + h + "'>" + c + "</option>", e._time_values.push(h), s.setTime(s.valueOf() + 60 * this.config.time_step * 1e3);
                             var u = s.getDate() != _ ? 1 : 0;
-                            h = 24 * u * 60 + 60 * s.getHours() + s.getMinutes()
+                            h = 24 * u * 60 + 60 * s.getHours() + s.getMinutes();							
                         }
                         r += "</select>"
                 }
